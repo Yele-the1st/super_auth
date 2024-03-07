@@ -22,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn(IBM_Plex.className, "bg-black")}>
+      <body className={cn(IBM_Plex.className, "bg-black text-white")}>
         <Providers>{children}</Providers>
       </body>
     </html>
