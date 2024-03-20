@@ -21,6 +21,7 @@ import FormSuccess from "../form-success";
 import { login } from "@/actions/login";
 import { useTransition } from "react";
 import { useSearchParams } from "next/navigation";
+import Link from "next/link";
 
 interface LoginFormProps {}
 
@@ -44,6 +45,9 @@ const LoginForm: FC<LoginFormProps> = ({}) => {
   });
 
   const onSubmit = (values: z.infer<typeof LoginSchema>) => {
+    setError("");
+    setSuccess("");
+
     startTransition(() => {
       login(values).then((data) => {
         setError(data?.error);
@@ -94,6 +98,14 @@ const LoginForm: FC<LoginFormProps> = ({}) => {
                       type="password"
                     />
                   </FormControl>
+                  <Button
+                    size={"sm"}
+                    variant={"link"}
+                    asChild
+                    className="px-0 font-normal text-white"
+                  >
+                    <Link href={"/auth/reset"}>Forgot password?</Link>
+                  </Button>
                   <FormMessage />
                 </FormItem>
               )}

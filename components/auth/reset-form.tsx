@@ -5,7 +5,7 @@ import * as z from "zod";
 import CardWrapper from "./card-wrapper";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { RegisterSchema } from "@/schemas";
+import { ResetSchema } from "@/schemas";
 import {
   Form,
   FormControl,
@@ -18,67 +18,44 @@ import { Input } from "../ui/framer-input";
 import { Button } from "../ui/button";
 import FormError from "../form-error";
 import FormSuccess from "../form-success";
-
+import { reset } from "@/actions/reset";
 import { useTransition } from "react";
-import { register } from "@/actions/register";
 
-interface RegisterFormProps {}
+interface LoginFormProps {}
 
-const RegisterForm: FC<RegisterFormProps> = ({}) => {
+const ResetForm: FC<LoginFormProps> = ({}) => {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
 
-  const form = useForm<z.infer<typeof RegisterSchema>>({
-    resolver: zodResolver(RegisterSchema),
+  const form = useForm<z.infer<typeof ResetSchema>>({
+    resolver: zodResolver(ResetSchema),
     defaultValues: {
       email: "",
-      password: "",
-      name: "",
     },
   });
 
-  const onSubmit = (values: z.infer<typeof RegisterSchema>) => {
+  const onSubmit = (values: z.infer<typeof ResetSchema>) => {
     setError("");
     setSuccess("");
 
     startTransition(() => {
-      register(values).then((data) => {
-        setError(data.error);
-        setSuccess(data.success);
+      reset(values).then((data) => {
+        setError(data?.error);
+        setSuccess(data?.success);
       });
     });
   };
 
   return (
     <CardWrapper
-      headerLabel="Create an account"
+      headerLabel="Forgot your password"
       backButtonHref="/auth/login"
-      backButtonLabel="Already have an account?"
-      showSocial
+      backButtonLabel="Back to login"
     >
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className=" space-y-6">
           <div className=" space-y-4">
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Name</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      disabled={isPending}
-                      placeholder="John doe"
-                      type="text"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
             <FormField
               control={form.control}
               name="email"
@@ -97,24 +74,6 @@ const RegisterForm: FC<RegisterFormProps> = ({}) => {
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Password</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      disabled={isPending}
-                      placeholder="******"
-                      type="password"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
           </div>
           <FormError message={error} />
           <FormSuccess message={success} />
@@ -124,7 +83,7 @@ const RegisterForm: FC<RegisterFormProps> = ({}) => {
             type="submit"
             className=" w-full"
           >
-            Create an account
+            Send reset email
           </Button>
         </form>
       </Form>
@@ -132,4 +91,4 @@ const RegisterForm: FC<RegisterFormProps> = ({}) => {
   );
 };
 
-export default RegisterForm;
+export default ResetForm;
