@@ -3,7 +3,7 @@
 import { FC } from "react";
 import { Button } from "../ui/button";
 import { FcGoogle } from "react-icons/fc";
-// import { FaGithub } from "react-icons/fa";
+import { FaGithub } from "react-icons/fa";
 import { signIn } from "next-auth/react";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 
