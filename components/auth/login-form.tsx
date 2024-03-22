@@ -34,6 +34,7 @@ const LoginForm: FC<LoginFormProps> = ({}) => {
   const [showTwoFactor, setShowTwoFactor] = useState(false);
 
   const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl");
   const urlError =
     searchParams.get("error") === "OAuthAccountNotLinked"
       ? "Email already in use with different provider!"
@@ -54,7 +55,7 @@ const LoginForm: FC<LoginFormProps> = ({}) => {
     console.log(values);
 
     startTransition(() => {
-      login(values)
+      login(values, callbackUrl)
         .then((data) => {
           if (data?.error) {
             if (data?.error === "Invalid code!") {

@@ -71,7 +71,7 @@ const SettingsPage = () => {
   };
 
   return (
-    <Card className=" max-w-md text-white border-primary bg-black w-full shadow-md">
+    <Card className=" max-w-md h-full text-white border-primary bg-black w-full shadow-md">
       <CardHeader>
         <p className="text-2xl font-semibold text-center">Settings</p>
       </CardHeader>
@@ -198,7 +198,7 @@ const SettingsPage = () => {
                   control={form.control}
                   name="isTwoFactorEnabled"
                   render={({ field }) => (
-                    <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
+                    <FormItem className="flex border-primary flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
                       <div className="space-y-0.5">
                         <FormLabel>Two Factor Authentication</FormLabel>
                         <FormDescription>

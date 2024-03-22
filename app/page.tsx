@@ -11,7 +11,7 @@ export default function Home() {
           Super Auth
         </p>
         <p className=" text-white">An amazing auth service using NextAuth</p>
-        <LoginButton>
+        <LoginButton asChild mode="modal">
           <Button size={"lg"}>Sign In</Button>
         </LoginButton>
       </div>
