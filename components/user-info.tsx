@@ -10,7 +10,7 @@ interface UserInfoProps {
 
 const UserInfo: FC<UserInfoProps> = ({ user, label }) => {
   return (
-    <Card className=" max-w-md border-primary bg-black w-full shadow-md">
+    <Card className=" sm:max-w-md border-primary bg-black w-full shadow-md">
       <CardHeader>
         <p className="text-2xl text-white font-semibold text-center">{label}</p>
       </CardHeader>
